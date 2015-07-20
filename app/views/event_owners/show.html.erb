@@ -1,0 +1,48 @@
+<% if (@is_admin && (!@event.has_valid_wepay_access_token? || !@event.has_wepay_account?)) %>
+  <p>
+    <b>Please create an account to manage your money: </b>
+	<% redirect_uri = url_for(:controller => 'event_owners', :action => 'oauth', :event_owner_id => @event.id, :host => request.host_with_port) %>
+    <a class="btn btn-primary" href="<%= @event.wepay_authorization_url(redirect_uri) %>">Click here to create your account</a>
+  </p>
+<% end %>
+<p>
+  <center>
+    <h1><%= @event.event_name %></h1>
+    <h4>Presented by: <%= @event.name %></h4>
+  </center>
+</p>
+<div id="show_container_hold">
+  <div id="show_container" class="box-space">
+    <div class="inner-text">
+      <p>
+        <strong>Event Details</strong>
+        <%= simple_format(@event.description) %>
+      </p>
+
+    </div>
+  </div>
+  <div id="show_container2" class="box-space">
+    <p>
+      <b>Starts:</b> <%= @event.from_event.strftime('%A, %b %d at %l:%M %p') %>
+      <br>
+      <b>Ends:</b> <%= @event.to_event.strftime('%A, %b %d at %l:%M %p') %>
+    </p>
+    <p>
+      <b>Location:</b> <%= simple_format(@event.location) %>
+      <iframe width="350" height="275" frameborder="0" style="border:0"
+src="https://www.google.com/maps/embed/v1/place?q=<%= URI.encode(@event.location) %>&key=AIzaSyBMHffLpqCs10zm8Q8r82uWFNb3KuAW8_k"></iframe>
+    </p>
+  </div>
+</div>
+<div id="show_container" class="price-hold">
+  <h3>Ticket Price: $<%= @event.ticket_price %></h3>
+  <% if (@event.has_wepay_account? && !@is_admin) %>
+  <%= link_to "Buy a ticket now! (Oauth)", "/event_owners/buy/#{@event.id}/oauth", :class => 'btn btn-success btn-large', :id => 'buy-now-button' %>
+  <%= link_to "Buy a ticket now! (Custom)", "/event_owners/buy/#{@event.id}/custom", :class => 'btn btn-primary btn-large', :id => 'buy-now-button' %>
+  <% end %>
+</div>
+<br>
+<% if (@is_admin) %>
+  <%= link_to 'Edit', edit_event_owner_path(@event) %> |
+  <%= link_to 'Back', event_owners_path %>
+<% end %>

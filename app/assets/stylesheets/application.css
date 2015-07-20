@@ -1,0 +1,200 @@
+/*
+ * This is a manifest file that'll be compiled into application.css, which will include all the files
+ * listed below.
+ *
+ * Any CSS and SCSS file within this directory, lib/assets/stylesheets, vendor/assets/stylesheets,
+ * or any plugin's vendor/assets/stylesheets directory can be referenced here using a relative path.
+ *
+ * You're free to add application-wide styles to this file and they'll appear at the bottom of the
+ * compiled file so the styles you add here take precedence over styles defined in any styles
+ * defined in the other CSS/SCSS files in this directory. It is generally better to create a new
+ * file per style scope.
+ *
+ *= require_tree .
+ *= require_self
+ */
+
+body {
+  font-family: 'Lato','Proxima Nova','Open Sans','Helvetica Neue',Arial,Helvetica,sans-serif !important;
+}
+
+ @media (min-width: 767px) {
+ body { padding-top: 60px; }
+ }
+
+ a.btn { color: #FFF; }
+ a.btn:visited { color: #FFF; }
+
+ a {
+    text-decoration: none !important;
+}
+
+li a {
+  background-color:transparent !important;
+}
+
+ul a:hover {
+  color: black !important;
+}
+
+ div.navbar div.container a { color: #EEE}
+
+ #buy-now-button {margin: 20px 0px ;}
+
+ .navbar-right {
+   margin-top: -50px !important;
+ }
+
+ .navbar {
+   background-color: #3498db;
+ }
+
+ #logo {
+   font-family: 'Capriola', sans-serif !important;
+ }
+
+ .brand {
+   text-decoration: none !important;
+   background: none !important;
+ }
+
+ .tix {
+   color: #34495e;
+ }
+
+ #call {
+   font-size: 75px;
+   margin-top: 75px;
+ }
+
+ #container {
+   background: url('image.jpg') no-repeat center !important;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+  width: 100%;
+  padding-top: 10px;
+  padding-bottom: 50px;
+  text-align: center;
+  margin-bottom: 40px;
+  color: white;
+ }
+
+ #divide {
+   background: url('spaper.png') !important;
+   width: 100%;
+   height: 100px;
+   margin-bottom: 20px;
+ }
+
+ #divide p {
+   text-align: center;
+   font-size: 50px;
+   padding: 40px;
+ }
+
+ #explain {
+   width: 40%;
+   margin: 0 auto;
+   margin-top: 40px;
+ }
+
+ .expl {
+   margin-bottom: 80px;
+ }
+
+.text {
+  font-size: 20px;
+  line-height: 30px;
+  margin-bottom: 20px;
+  margin-left: 80px;
+  margin-top: -50px;
+}
+
+#btn-sign {
+  border-radius: 5px;
+  margin-top: 40px;
+  padding: 10px 50px;
+  display: inline-block;
+}
+
+#btn-sign p {
+  font-size: 20px;
+  padding-top: 15px;
+  color: white;
+  font-family: 'Open Sans', sans-serif;
+}
+
+#btn-sign:hover {
+  color: white;
+}
+
+.evenly {
+  display:flex;
+  justify-content:space-between;
+  text-align: center;
+  margin: 0 auto;
+  margin-bottom: 20px;
+}
+
+.evenly p {
+  padding-top: 30px;
+  width: 60%;
+  margin: 0 auto;
+}
+
+#signup-form {
+  width: 30%;
+  margin: 0 auto;
+}
+
+.field label {
+  font-size: 20px;
+}
+
+.field input {
+  width: 400px;
+}
+
+.field textarea {
+  width: 400px;
+}
+
+#show_container_hold {
+  width: 1200px;
+  margin: 0 auto;
+}
+
+#show_container {
+  width: 50%;
+  margin: 0 auto;
+  background: #ecf0f1;
+  border-radius: 5px;
+  margin-top: 20px;
+}
+
+.inner-text {
+  width: 80%;
+  margin: 0 auto;
+  margin-top: 20px;
+  padding-bottom: 20px;
+  padding-top: 10px;
+}
+
+.box-space {
+    display: inline-block;
+}
+
+#show_container2 {
+  width: 40%;
+  margin: 0 auto;
+  border-radius: 5px;
+  padding: 10px;
+  margin-left: 5px;
+}
+
+.price-hold {
+  padding: 10px;
+  text-align: center;
+}

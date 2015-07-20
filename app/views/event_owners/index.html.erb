@@ -1,0 +1,7 @@
+<h1>My Events</h1>
+
+<ol>
+<% @events.each do |event_owner| %>
+  <li><h4><%= link_to event_owner.event_name, event_owner %></h4></li>
+<% end %>
+</ol>

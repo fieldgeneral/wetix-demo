@@ -1,0 +1,99 @@
+<% if params[:type] == "oauth" %>
+<center>
+	<h1>Buy a ticket for <%= @event.event_name %> for <%= number_to_currency(@event.ticket_price, :unit => "$") %></h1>
+
+  <div id="wepay-iframe-div">
+	  <script type="text/javascript" src="https://www.wepay.com/js/iframe.wepay.js"></script>
+
+	  <script type="text/javascript">
+		  WePay.iframe_checkout("wepay-iframe-div", "<%= @checkout['checkout_uri'] %>");
+	  </script>
+  </div>
+  <p><%= link_to "← back to " + @event.name + "'s " + @event.event_name, @event %></p>
+<center>
+<% elsif params[:type] == "custom" %>
+
+<div class='card-wrapper'></div>
+<form>
+    <table>
+		<tr><td><input type="text" id="cc-number" name="number" placeholder="Number"></td></tr>
+    <tr><td><input type="text" id="name" name="name" placeholder="First Name Last Name"/></td></tr>
+    <tr><td><input type="text" id="cc-month" name="month" placeholder="MM"/> / <input type="text" id="cc-year" name="year" placeholder="YY"/></td></tr>
+    <tr><td><input type="text" id="cc-cvv" name="cvv" placeholder="CVV" /></td></tr>
+		<tr><td><input type="text" id="zip" name="zip" placeholder="Zip Code" /></td></tr>
+		<tr><td><input type="text" id="email" name="email" placeholder="Email"/></td></tr>
+		<td><input type="submit" name="Submit" value="Submit" id="cc-submit" class="btn btn-success"></td>
+		<input type="hidden" name="event_owner_id" value="<%= params[:event_owner_id] %>">
+		</table>
+</form>
+<script type="text/javascript" src="https://static.wepay.com/min/js/tokenization.v2.js"></script>
+<script>
+var card = new Card({
+    form: 'form',
+    container: '.card-wrapper',
+
+    formSelectors: {
+        nameInput: 'input[name="name"]',
+				numberInput: 'input[name="number"]',
+				expiryInput: 'input[name="month"], input[name="year"]',
+				cvcInput: 'input[name="cvv"]'
+    }
+});
+</script>
+
+<script type="text/javascript">
+(function() {
+    WePay.set_endpoint("stage"); // change to "production" when live
+
+    // Shortcuts
+    var d = document;
+        d.id = d.getElementById,
+        valueById = function(id) {
+            return d.id(id).value;
+        };
+
+    // For those not using DOM libraries
+    var addEvent = function(e,v,f) {
+        if (!!window.attachEvent) { e.attachEvent('on' + v, f); }
+        else { e.addEventListener(v, f, false); }
+    };
+
+    // Attach the event to the DOM
+    addEvent(d.id('cc-submit'), 'click', function() {
+        var userName = [valueById('name')].join(' ');
+            response = WePay.credit_card.create({
+            "client_id":        123490,
+            "user_name":        valueById('name'),
+            "email":            valueById('email'),
+            "cc_number":        valueById('cc-number'),
+            "cvv":              valueById('cc-cvv'),
+            "expiration_month": valueById('cc-month'),
+            "expiration_year":  valueById('cc-year'),
+            "address": {
+                "zip": valueById('zip')
+            }
+        }, function(data) {
+            if (data.error) {
+                console.log(data);
+                alert("Sorry, something went wrong. Try your card again.")
+            } else {
+                // call your own app's API to save the token inside the data;
+                // show a success page
+								$.ajax({
+    							url: "/event_owners/buy_custom",
+    							type: "POST",
+    							data: {credit_card_id: data.credit_card_id, event_owner_id: <%= @event.id %>},
+    							success: function(resp){}
+								});
+            }
+        });
+    });
+
+})();
+</script>
+
+<% else %>
+  <script type="text/javascript">
+    window.location.href="/event_owners/<%= @event.id %>"  // put your correct path in a string here
+  </script>
+<% end %>
