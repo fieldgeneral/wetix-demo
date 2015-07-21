@@ -11,6 +11,7 @@
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
 <link href="http://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet" type="text/css">
 <link href="http://fonts.googleapis.com/css?family=Capriola" rel="stylesheet" type="text/css">
+<link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
 </head>
 <body>
 <div class="contain">
@@ -38,14 +39,16 @@
   <ul class="nav navbar-nav navbar-right">
     <% if current_user %>
     <li>
-    <%= link_to 'Logout', logout_path %>
+      <% if kyc_check.include?("kyc") %>
+        <%= link_to '<i class="fa fa-exclamation-triangle fa-2x" style="color: yellow;" title="Please verify KYC"></i>'.html_safe, kyc_page_path , :data => { :colorbox => true } %>
+      <% end %>
+    </li>
+    <li>
+      <%= link_to 'Logout', logout_path %>
     </li>
     <% else %>
     <li>
-    <%= link_to 'Sign Up', register_path %>
-    </li>
-    <li>
-    <%= link_to 'Login', login_path %>
+      <%= link_to 'Login', login_path %>
     </li>
     <% end %>
   </ul>

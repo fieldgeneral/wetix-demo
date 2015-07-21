@@ -175,6 +175,10 @@ def custom_user
     end
 end
 
+def kyc_page
+  @uri = kyc_account
+end
+
 private
     # Use callbacks to share common setup or constraints between actions.
     def set_event_owner

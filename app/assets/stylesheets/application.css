@@ -12,6 +12,7 @@
  *
  *= require_tree .
  *= require_self
+ *= require colorbox-rails
  */
 
 body {
@@ -196,5 +197,11 @@ ul a:hover {
 
 .price-hold {
   padding: 10px;
+  text-align: center;
+}
+
+.authorize {
+  width: 100%;
+  margin-top: 20px;
   text-align: center;
 }

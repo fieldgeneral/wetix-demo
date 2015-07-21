@@ -10,4 +10,32 @@ def current_user
 rescue ActiveRecord::RecordNotFound
     session[:event_owner_id] = nil
 end
+
+###### Check for KYC ######
+
+def kyc_check
+  @account = EventOwner.find(current_user.id)
+  response = WEPAY.call('/account', @account.wepay_access_token, {
+    :account_id => @account.wepay_account_id
+    })
+
+    response['action_reasons'].to_s
+end
+
+def kyc_account
+  @account = EventOwner.find(current_user.id)
+  kyc = WEPAY.call('/account/get_update_uri', @account.wepay_access_token, {
+    :account_id   => @account.wepay_account_id,
+    :mode         => "iframe",
+    :prefill_info => {
+      :name  => @account.name,
+      :email => @account.email
+    }
+    })
+
+    kyc['uri']
+end
+
+helper_method :kyc_check
+
 end

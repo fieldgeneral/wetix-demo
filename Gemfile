@@ -46,3 +46,4 @@ end
 gem 'bcrypt-ruby', '~> 3.0.0', :require => "bcrypt"
 gem 'wepay', '~> 0.2.2'
 gem 'certified'
+gem 'colorbox-rails'

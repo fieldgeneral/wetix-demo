@@ -22,6 +22,8 @@ Rails.application.routes.draw do
 
   get '/event_owners/:action(/:event_owner_id)/:type' => "event_owners#buy"
 
+  get 'kyc_page' => "event_owners#kyc_page"
+
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
