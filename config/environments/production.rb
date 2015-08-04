@@ -76,4 +76,8 @@ Rails.application.configure do
 
   # Do not dump schema after migrations.
   config.active_record.dump_schema_after_migration = false
+  CLIENT_ID = "123490"
+  CLIENT_SECRET = "6ab0290174"
+  USE_STAGE = true
+  WEPAY = WePay::Client.new(CLIENT_ID, CLIENT_SECRET, USE_STAGE)
 end
