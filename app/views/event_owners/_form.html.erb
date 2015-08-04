@@ -50,7 +50,8 @@
     <%= f.number_field :ticket_price %>
   </div>
   <div class="actions">
-    <%= f.submit "Create Event", :class => "btn btn-primary" %>
+    <%= f.submit "Create Event (Oauth)", :class => "btn btn-primary", name: "oauth" %>
+    <%= f.submit "Create Event (Custom)", :class => "btn btn-success", name: "custom" %>
   </div>
   </div>
 <% end %>

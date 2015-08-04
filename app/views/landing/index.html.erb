@@ -1,13 +1,7 @@
 <div id="container">
   <h1 id="call">Event Pages. Simplified</h1>
   <h3>Take the hassle out of putting on events.</h3>
-  <div class="btn-group">
-      <button type="button" class="btn btn-primary btn-lg dropdown-toggle" id="btn-sign" data-toggle="dropdown">Sign Up<span class="caret red"></span></button>
-      <ul class="dropdown-menu" role="menu">
-        <li><a href="/register_oauth">Oauth</a></li>
-        <li><a href="/register_custom">Custom</a></li>
-      </ul>
-  </div>
+  <%= link_to "Sign Up", new_event_owner_path, class: "btn btn-primary btn-lg", id: "btn-sign" %>
   <button class="btn btn-inverse btn-lg" id="btn-sign" type="button" data-toggle="dropdown">
   Demo
 </div>

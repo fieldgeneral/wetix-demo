@@ -40,7 +40,7 @@
     <% if current_user %>
     <li>
       <% if kyc_check.include?("kyc") %>
-        <%= link_to '<i class="fa fa-exclamation-triangle fa-2x" style="color: yellow;" title="Please verify KYC"></i>'.html_safe, kyc_page_path , :data => { :colorbox => true } %>
+        <%= link_to "Payment Dashboard", dashboard_path  %>
       <% end %>
     </li>
     <li>

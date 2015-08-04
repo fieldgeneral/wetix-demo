@@ -15,14 +15,11 @@ Rails.application.routes.draw do
 
   match '/event_owners/:action(/:event_owner_id)', controller: 'event_owners', via: [:get, :post]
 
-  get '/register_oauth' => 'event_owners#new'
-
-  get '/register_custom' => 'event_owners#new_custom'
   post 'custom_user' => 'event_owners#custom_user'
 
   get '/event_owners/:action(/:event_owner_id)/:type' => "event_owners#buy"
 
-  get 'kyc_page' => "event_owners#kyc_page"
+  get 'dashboard' => "event_owners#dashboard"
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

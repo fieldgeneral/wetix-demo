@@ -36,10 +36,8 @@ src="https://www.google.com/maps/embed/v1/place?q=<%= URI.encode(@event.location
 </div>
 <div id="show_container" class="price-hold">
   <h3>Ticket Price: $<%= @event.ticket_price %></h3>
-  <% if (@event.has_wepay_account? && !@is_admin) %>
   <%= link_to "Buy a ticket now! (Iframe)", "/event_owners/buy/#{@event.id}/iframe", :class => 'btn btn-success btn-large', :id => 'buy-now-button' %>
   <%= link_to "Buy a ticket now! (Custom)", "/event_owners/buy/#{@event.id}/custom", :class => 'btn btn-primary btn-large', :id => 'buy-now-button' %>
-  <% end %>
 </div>
 <br>
 <% if (@is_admin) %>

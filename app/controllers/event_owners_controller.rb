@@ -7,7 +7,7 @@ class EventOwnersController < ApplicationController
     if current_user.nil?
       redirect_to root_path
     end
-    @events = EventOwner.all
+    @event = EventOwner.find(current_user)
   end
 
   # GET /event_owners/1
@@ -39,15 +39,19 @@ class EventOwnersController < ApplicationController
   def create
     @event = EventOwner.new(event_owner_params)
 
-    respond_to do |format|
-      if @event.save
-        session[:event_owner_id] = @event.id
-        format.html { redirect_to @event, notice: 'Event was successfully created.' }
-        format.json { render :show, status: :created, location: @event }
-      else
-        format.html { render :new }
-        format.json { render json: @event.errors, status: :unprocessable_entity }
+    if params[:oauth]
+      respond_to do |format|
+        if @event.save
+          session[:event_owner_id] = @event.id
+          format.html { redirect_to @event, notice: 'Event was successfully created.' }
+          format.json { render :show, status: :created, location: @event }
+        else
+          format.html { render :new }
+          format.json { render json: @event.errors, status: :unprocessable_entity }
+        end
       end
+    elsif params[:custom]
+      custom_user()
     end
   end
 
@@ -130,16 +134,8 @@ end
 
 ##################### Custom User Creation ###############
 
-def new_custom
-  if current_user
-    redirect_to root_path, :notice => "You are already registered."
-  end
-    @event = EventOwner.new
-end
-
 def custom_user
   require 'wepay'
-  @event = EventOwner.new(event_owner_params)
 
   response = WEPAY.call('/user/register', false, {
     :client_id       => CLIENT_ID,
