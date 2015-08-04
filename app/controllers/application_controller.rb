@@ -4,20 +4,6 @@ class ApplicationController < ActionController::Base
   protect_from_forgery with: :exception
   helper_method :current_user
 
-before_filter :protect
-
-def protect
-  require 'open-uri'
-  remote_ip = open('http://whatismyip.akamai.com').read
-  @ips = ["12.37.161.213"]
-  if not(@ips.include?(remote_ip))
-     # Check for your subnet stuff here, for example
-     # if not request.remote_ip.include?('127.0,0')
-     render :text => "You are unauthorized"
-     return
-  end
-end
-
 private
 def current_user
   @current_user ||= EventOwner.find(session[:event_owner_id]) if session[:event_owner_id]
